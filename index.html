@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convoking4™ - Organizational Snapshot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="app-container">
+        <header class="header">
+            <h1 class="logo-title">Convoking<span class="logo-red">4</span>™</h1>
+            <p class="tagline">The Organizational Snapshot Assessment</p>
+        </header>
 
+        <div class="top-bar">
+            <div class="top-bar-controls">
+                <div class="top-bar-info">
+                    <span id="version-display"></span>
+                    <span id="current-date"></span>
+                </div>
+                <div class="top-bar-actions">
+                    <label for="progress-file-loader" class="button-label">Load Profile</label>
+                    <button id="clear-form-button" class="button-label btn-outline">Clear Form</button>
+                </div>
+            </div>
+            <nav id="nav-container">
+                <ul class="nav-links" id="nav-links-container">
+                    </ul>
+            </nav>
+        </div>
+
+        <form id="profile-form">
+            <div id="dynamic-form-content">
+                </div>
+            
+            <button type="submit" id="generate-button" class="btn">Save Snapshot to File (.json)</button>
+        </form>
+    </div>
+    
+    <div id="notification-banner"></div>
+    <input type="file" id="progress-file-loader" style="display:none" accept=".json">
+
+    <dialog id="ai-prompt-modal">
+        <header class="modal-header">
+            <h3>The Advanced AI Prompt for Strategic Audits</h3>
+            <button class="close-button" aria-label="Close" id="close-modal-button-top">&times;</button>
+        </header>
+        <section class="modal-content">
+            <p><strong>Instructions:</strong> Copy and paste the entire prompt below into your AI assistant to validate your assessment.</p>
+            <textarea id="ai-prompt-output" class="form-control" readonly></textarea>
+        </section>
+        <footer class="modal-footer">
+            <button id="select-prompt-button" class="btn-primary">Select All & Copy</button>
+            <button class="btn-secondary" formmethod="dialog">Close</button>
+        </footer>
+    </dialog>
+
+    <template id="template-textfield">
+      <div class="form-group">
+        <label class="main-label"></label>
+        <p class="description"></p>
+        <p class="option-example"></p>
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+    </template>
+    
+    <template id="template-inputfield">
+      <div class="form-group">
+        <label class="main-label"></label>
+        <p class="description"></p>
+        <p class="option-example"></p>
+        <input class="form-control">
+      </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
