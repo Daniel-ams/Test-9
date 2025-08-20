@@ -3,43 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convoking4™ - Organizational Snapshot</title>
+    <title>Convoking4™ - Snapshot Assessment</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" id="app-container">
-        <header class="header">
-            <h1 class="logo-title">Convoking<span class="logo-red">4</span>™</h1>
-            <p class="tagline">The Organizational Snapshot Assessment</p>
-        </header>
+    <!-- App Container -->
+    <div class="container">
 
-        <div class="top-bar">
-            <div class="top-bar-controls">
-                <div class="top-bar-info">
-                    <span id="version-display"></span>
-                    <span id="current-date"></span>
-                </div>
-                <div class="top-bar-actions">
-                    <label for="progress-file-loader" class="button-label">Load Profile</label>
-                    <button id="clear-form-button" class="button-label btn-outline">Clear Form</button>
+        <!-- View 1: Chooser Screen (Visible on Load) -->
+        <div id="chooser-view">
+            <header class="header">
+                <h1 class="logo-title">Convoking<span class="logo-red">4</span>™</h1>
+                <p class="tagline">The Organizational Snapshot Assessment</p>
+            </header>
+            <div class="chooser-box">
+                <h2>What would you like to assess?</h2>
+                <p>Choose an option to begin a new snapshot or load a saved one.</p>
+                <div class="chooser-buttons">
+                    <button id="assess-org-button" class="btn btn-primary">An Organization</button>
+                    <button id="assess-undertaking-button" class="btn btn-secondary">A Project / Undertaking</button>
                 </div>
             </div>
-            <nav id="nav-container">
-                <ul class="nav-links" id="nav-links-container">
-                    </ul>
-            </nav>
         </div>
 
-        <form id="profile-form">
-            <div id="dynamic-form-content">
+        <!-- View 2: Main Application (Initially Hidden) -->
+        <div id="app-view" class="hidden">
+            <div class="top-bar">
+                <div class="top-bar-controls">
+                    <div class="top-bar-info">
+                        <span id="version-display"></span>
+                        <span id="current-date"></span>
+                    </div>
+                    <div class="top-bar-actions">
+                        <button id="return-to-menu-button" class="button-label">Main Menu</button>
+                        <label for="org-file-loader" class="button-label">Load Snapshot</label>
+                        <button id="clear-form-button" class="button-label" style="background: none; border: 1px solid #ccc;">Clear Form</button>
+                    </div>
                 </div>
-            
-            <button type="submit" id="generate-button" class="btn">Save Snapshot to File (.json)</button>
-        </form>
+                <nav id="nav-container">
+                    <ul class="nav-links" id="nav-links-container"></ul>
+                </nav>
+            </div>
+
+            <div id="undertaking-loader-container" class="hidden">
+                <div class="chooser-box">
+                    <h3>Load Parent Organization Files</h3>
+                    <p>To begin an Undertaking, first load the parent Organization's Snapshot, then its AI Diagnostic Report.</p>
+                    <div class="chooser-buttons">
+                         <label for="org-file-loader" class="btn btn-primary">1. Load Organization Snapshot (.json)</label>
+                         <label for="ai-report-loader" id="load-ai-report-label" class="btn btn-secondary disabled">2. Load AI Diagnostic Report (.md/.txt)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="briefing-document-container" class="hidden">
+                <h3>Briefing Document: Parent Organization Diagnostic</h3>
+                <pre id="briefing-document-content"></pre>
+            </div>
+
+            <form id="profile-form">
+                <div id="dynamic-form-content"></div>
+                <button type="button" id="generate-button" class="btn">Save Snapshot to File (.json)</button>
+            </form>
+        </div>
     </div>
     
     <div id="notification-banner"></div>
-    <input type="file" id="progress-file-loader" style="display:none" accept=".json">
+    <input type="file" id="org-file-loader" style="display:none" accept=".json">
+    <input type="file" id="ai-report-loader" style="display:none" accept=".md, .txt">
 
     <dialog id="ai-prompt-modal">
         <header class="modal-header">
@@ -47,33 +78,21 @@
             <button class="close-button" aria-label="Close" id="close-modal-button-top">&times;</button>
         </header>
         <section class="modal-content">
-            <p><strong>Instructions:</strong> Copy and paste the entire prompt below into your AI assistant to validate your assessment.</p>
-            <textarea id="ai-prompt-output" class="form-control" readonly></textarea>
+            <p><strong>Instructions:</strong> Copy and paste the entire prompt below into your AI assistant.</p>
+            <ol>
+                <li>Click the "Select All & Copy" button to copy the prompt to your clipboard.</li>
+                <li>Go to your preferred AI assistant (e.g., Google's Gemini).</li>
+                <li>Paste the complete text and submit it for analysis.</li>
+            </ol>
+            <textarea id="ai-prompt-output" readonly></textarea>
         </section>
         <footer class="modal-footer">
             <button id="select-prompt-button" class="btn-primary">Select All & Copy</button>
-            <button class="btn-secondary" formmethod="dialog">Close</button>
+            <button id="close-modal-button-bottom" class="btn-secondary">Close</button>
         </footer>
     </dialog>
-
-    <template id="template-textfield">
-      <div class="form-group">
-        <label class="main-label"></label>
-        <p class="description"></p>
-        <p class="option-example"></p>
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-    </template>
-    
-    <template id="template-inputfield">
-      <div class="form-group">
-        <label class="main-label"></label>
-        <p class="description"></p>
-        <p class="option-example"></p>
-        <input class="form-control">
-      </div>
-    </template>
 
     <script src="script.js"></script>
 </body>
 </html>
+
