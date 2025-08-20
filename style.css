@@ -1,1 +1,324 @@
+/*==============================================
+  1. DESIGN TOKENS (VARIABLES)
+==============================================*/
+:root {
+  /* Brand & Status Colors */
+  --brand-primary: #a70200;
+  --brand-primary-hover: #8c0200;
+  --brand-secondary: #0056b3;
+  --color-success: #28a745;
+  --color-error: var(--brand-primary);
 
+  /* Text & Surface Colors */
+  --text-primary: #333;
+  --text-secondary: #000;
+  --text-muted: #6c757d;
+  --text-on-brand: #fff;
+  --surface-primary: #fff;
+  --surface-secondary: #f8f9fa;
+  --surface-highlight: #f7f9fc;
+  
+  /* Borders */
+  --border-color-light: #eee;
+  --border-color-med: #dee2e6;
+  --border-color-dark: #ccc;
+  --border-radius: 5px;
+  --border-radius-lg: 10px;
+
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+
+  /* Typography */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mono: monospace;
+  --font-size-sm: 0.85em;
+  --font-size-md: 1em;
+  --font-size-lg: 1.2em;
+}
+
+/*==============================================
+  2. BASE & GLOBAL STYLES
+==============================================*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: #f4f7f9;
+  color: var(--text-primary);
+  margin: 0;
+  padding: var(--spacing-lg);
+}
+
+h2 {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color-med);
+  padding-bottom: var(--spacing-sm);
+  margin-top: calc(var(--spacing-xl) + var(--spacing-sm)); /* 40px */
+}
+
+/* Accessibility: Add focus styles for keyboard navigation */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--brand-secondary);
+  outline-offset: 2px;
+}
+
+/*==============================================
+  3. LAYOUT & CONTAINER
+==============================================*/
+.container {
+  max-width: 800px;
+  margin: var(--spacing-lg) auto;
+  background: var(--surface-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.header {
+  text-align: center;
+  border-bottom: 2px solid var(--border-color-light);
+  padding-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/*==============================================
+  4. COMPONENTS
+==============================================*/
+
+/* --- Top Bar & Navigation --- */
+.top-bar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(5px);
+  padding: var(--spacing-md);
+  margin: 0 calc(-1 * var(--spacing-xl)) var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color-med);
+  z-index: 100;
+}
+
+.top-bar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  list-style: none;
+  padding: var(--spacing-md) 0 0 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--brand-primary);
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: block;
+  width: 100%;
+  background-color: var(--brand-primary);
+  color: var(--text-on-brand);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: var(--spacing-xl);
+  text-align: center;
+}
+.btn:hover {
+  background-color: var(--brand-primary-hover);
+}
+.btn.is-dirty {
+  background-color: var(--brand-secondary);
+}
+
+.button-label {
+  font-size: 0.9em;
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color-dark);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.button-label:hover {
+  background-color: #e0e0e0;
+  border-color: #bbb;
+}
+
+/* Utility class for secondary/outline buttons */
+.btn-outline {
+  background: none;
+  border: 1px solid var(--border-color-dark);
+}
+.btn-outline:hover {
+  background-color: var(--surface-secondary);
+}
+
+/* --- Form Elements --- */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.main-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.1em;
+  color: var(--text-secondary);
+}
+
+.description {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  margin: 0 0 var(--spacing-md) 0;
+  font-style: italic;
+}
+
+/* Reusable class for text-based form controls */
+.form-control {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color-dark);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  font-size: var(--font-size-md);
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+textarea.form-control {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* --- Modal Dialog --- */
+dialog {
+  border: 1px solid var(--border-color-dark);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 0;
+  max-width: 750px;
+  width: 90%;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color-med);
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.modal-content {
+  padding: var(--spacing-lg);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--border-color-med);
+  background-color: var(--surface-secondary);
+}
+
+.modal-footer button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+.modal-footer .btn-primary {
+  background-color: var(--brand-secondary);
+  color: var(--text-on-brand);
+  border: 1px solid var(--brand-secondary);
+}
+.modal-footer .btn-secondary {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color-dark);
+}
+
+/* --- Notification Banner --- */
+#notification-banner {
+  position: fixed;
+  top: -100px; /* Initially hidden */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-success);
+  color: var(--text-on-brand);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 200;
+  transition: top 0.5s ease-in-out;
+}
+
+#notification-banner.is-visible {
+  top: 20px;
+}
+#notification-banner.is-error {
+  background-color: var(--color-error);
+}
+
+/*==============================================
+  5. RESPONSIVENESS
+==============================================*/
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-sm);
+  }
+  .container {
+    padding: var(--spacing-md);
+    margin: var(--spacing-sm) auto;
+  }
+  .top-bar {
+    margin-left: calc(-1 * var(--spacing-md));
+    margin-right: calc(-1 * var(--spacing-md));
+  }
+  .top-bar-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .modal-header h3 {
+    font-size: 1.1em;
+  }
+}
